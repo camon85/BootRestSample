@@ -40,8 +40,8 @@ public class ArticleController {
 
     @RequestMapping(value = "/{id}", method = PUT)
     @ResponseStatus(HttpStatus.OK)
-    public Article modify(@RequestBody Article article) {
-        return articleService.modify(article);
+    public Article modify(@PathVariable Long id, @RequestBody Article article) {
+        return articleService.modify(id, article);
     }
 
     @RequestMapping(value = "/{id}", method = DELETE)

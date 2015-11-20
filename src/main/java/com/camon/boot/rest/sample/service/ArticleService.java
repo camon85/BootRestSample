@@ -34,10 +34,11 @@ public class ArticleService {
         return repository.save(article);
     }
 
-    public Article modify(Article article) {
-        Date now = new Date();
-        article.setUpdated(now);
-        return repository.save(article);
+    public Article modify(Long id, Article article) {
+        Article oldArticle = findById(id);
+        oldArticle.setContent(article.getContent());
+        oldArticle.setUpdated(new Date());
+        return repository.save(oldArticle);
     }
 
     public void remove(Long id) {
