@@ -28,8 +28,8 @@ public class ArticleController {
 
     @RequestMapping(method = GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<Article> findAll() {
-        return articleService.findAll();
+    public List<Article> findAll(@RequestParam(required = false) String content) {
+        return articleService.findAll(content);
     }
 
     @RequestMapping(value = "/{id}", method = GET)

@@ -4,6 +4,7 @@ import com.camon.boot.rest.sample.domain.Article;
 import com.camon.boot.rest.sample.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -19,8 +20,16 @@ public class ArticleService {
     @Autowired
     private ArticleRepository repository;
 
-    public List<Article> findAll() {
-        return repository.findAll();
+    public List<Article> findAll(String content) {
+        List<Article> articles;
+
+        if (StringUtils.isEmpty(content)) {
+            articles = repository.findAll();
+        } else {
+            articles = repository.findByContentContainingIgnoreCase(content);
+        }
+
+        return articles;
     }
 
     public Article findById(Long id) {
